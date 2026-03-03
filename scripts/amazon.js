@@ -4,6 +4,7 @@
 //4. Update cart quantity in header
 
 import { cart } from '../data/cart.js';
+import { products } from '../data/products.js';
 
 let productsHTML = '';
 
