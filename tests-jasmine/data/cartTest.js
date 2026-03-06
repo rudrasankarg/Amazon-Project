@@ -9,6 +9,9 @@
 
 //For Flaky Test, we use Mocks and Spies. Mocks are objects that mimic the behavior of real objects. Spies are functions that record how they were called. Use mocks and spies to isolate the code being tested and to control the behavior of dependencies.
 
+//Integration Tests: Test how different parts of the code work together. For example, if you have a function that calls another function, you can test the integration of these two functions by calling the first function and checking the result.
+
+
 import { addToCart, cart, loadFromStorage } from '../../data/cart.js';
 
 describe('test suite: addToCart', () => {
