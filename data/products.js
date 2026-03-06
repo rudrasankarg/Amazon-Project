@@ -1,12 +1,25 @@
-export function getProduct(productId) {
-      let matchingProduct;
-      products.forEach((product) => {
-          if (product.id === productId) {
-              matchingProduct = product;
-          }
-      });
-  
-      return matchingProduct;
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  price;
+
+  constructor(productDetails){
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.price = productDetails.price;
+  }
+
+  getStarsUrl(){
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+  getPrice(){
+    return `₹${this.price}`;
+  }
 }
 
 export const products = [
@@ -667,5 +680,18 @@ export const products = [
       "apparel",
       "mens"
     ]
-  }
-];
+  }].map((productDetails) => {
+  return new Product(productDetails);
+});
+
+export function getProduct(productId) {
+  let matchingProduct;
+
+  products.forEach((product) => {
+    if (product.id === productId) {
+      matchingProduct = product;
+    }
+  });
+
+  return matchingProduct;
+}
