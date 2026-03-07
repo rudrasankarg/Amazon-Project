@@ -1,3 +1,6 @@
+//Built In Classes: Day(), Date(), String(), Number(), Array(), Object()
+//logthis.call(arguments) - logs the arguments passed to the function - sets this value to the function that is being called
+
 class Product {
   id;
   image;
@@ -42,6 +45,9 @@ class Clothing extends Product {
     </a>`;
   }
 }
+
+
+
 
 
 export const products = [
