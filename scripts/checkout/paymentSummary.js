@@ -8,7 +8,7 @@ export function renderPaymentSummary(){
 
     cart.forEach((cartItem) => {
         const product = getProduct(cartItem.productId);
-        productprice += product.price * cartItem.quantity;
+        productprice += product.priceCents * cartItem.quantity;
 
         const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
         shippingPrice += deliveryOption.price;

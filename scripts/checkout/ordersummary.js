@@ -13,6 +13,11 @@ export function renderOrderSummary(){
 
     const matchingProduct = getProduct(productId);
 
+        if (!matchingProduct) {
+        console.error('Product not found:', productId);
+        return;
+        }
+
     const deliveryOptionId = cartItem.deliveryOptionId;
     const deliveryOption = getDeliveryOption(deliveryOptionId);
 
