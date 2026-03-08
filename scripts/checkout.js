@@ -3,7 +3,21 @@ import { renderPaymentSummary } from "./checkout/paymentsummary.js";
 //import '../data/cart-class.js';
 //import '../data/backend-practice.js';
 import { loadProductsFetch } from "../data/products.js";
-import { loadCart } from "../data/cart.js";
+import { loadCart, cart } from "../data/cart.js";
+
+
+function updateCheckoutItems() {
+  let itemCount = 0;
+
+  cart.forEach((cartItem) => {
+    itemCount += cartItem.quantity;
+  });
+
+  const element = document.querySelector('.js-checkout-items');
+  if (element) {
+    element.innerHTML = `${itemCount} items`;
+  }
+}
 
 async function loadPage(){
     try{
@@ -21,6 +35,7 @@ async function loadPage(){
 }
     renderOrderSummary();
     renderPaymentSummary();
+    updateCheckoutItems();
 }
 
 loadPage();

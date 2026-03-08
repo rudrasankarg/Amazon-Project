@@ -76,9 +76,13 @@ function renderProductsGrid() {
       cartQuantity += cartItem.quantity;
     });
 
-    document.querySelector('.js-cart-quantity')
-      .innerHTML = cartQuantity;
+    const quantityElement = document.querySelector('.js-cart-quantity');
+    if (quantityElement) {
+      quantityElement.innerHTML = cartQuantity;
+    }
   }
+
+  updateCartQuantity();
 
   document.querySelectorAll('.js-add-to-cart')
     .forEach((button) => {
