@@ -6,14 +6,19 @@ import { loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 async function loadPage(){
-
+    try{
     await loadProductsFetch();
-    await new Promise((resolve) => {
+    await new Promise((resolve, reject) => {
         loadCart(() => {
+            //reject();
             resolve();
         }
         );
     });
+
+    } catch(error) {
+    console.error('Error loading data:', error);
+}
     renderOrderSummary();
     renderPaymentSummary();
 }

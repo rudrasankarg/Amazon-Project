@@ -59,6 +59,8 @@ export function loadProductsFetch(){
       }
       return new Product(productDetails);
     });
+  }).catch(() => {
+    console.log('An error occurred while loading products.');
   });
 
   return promise;
@@ -80,6 +82,10 @@ export function loadProducts(fun){
     });
     
     fun();
+  });
+
+  xhr.addEventListener('error', () => {
+    console.log('An error occurred while loading products.');
   });
     
 
