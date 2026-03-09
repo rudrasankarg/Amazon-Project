@@ -3,7 +3,7 @@
 //2. How page behaves when user clicks on buttons, etc.
 
 
-import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
+import {renderOrderSummary} from '../../scripts/checkout/ordersummary.js';
 import {loadFromStorage, cart} from '../../data/cart.js';
 import {loadProducts, loadProductsFetch} from '../../data/products.js';
 
