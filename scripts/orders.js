@@ -10,6 +10,14 @@ async function renderOrders() {
 
   await loadProductsFetch();
 
+
+  if(!orders || orders.length === 0){
+    document.querySelector('.js-orders-grid').innerHTML =
+      '<p>No orders yet.</p>';
+    return;
+  }
+
+  
   let ordersHTML = '';
 
   orders.forEach((order) => {
