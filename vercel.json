@@ -1,5 +1,9 @@
 {
   "routes": [
-    { "src": "/", "dest": "/amazon.html" }
+    { "src": "/", "dest": "/amazon.html" },
+    { "src": "/checkout", "dest": "/checkout.html" },
+    { "src": "/orders", "dest": "/orders.html" },
+    { "src": "/tracking", "dest": "/tracking.html" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
