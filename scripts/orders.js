@@ -1,6 +1,10 @@
 import { orders } from "../data/order.js";
 import { getProduct, loadProductsFetch } from "../data/products.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+import { updateCartQuantity } from './utils/cartQuantity.js';
+import { addToCart } from '../data/cart.js';
+
+updateCartQuantity();
 
 async function renderOrders() {
 
@@ -40,11 +44,13 @@ async function renderOrders() {
             Quantity: ${orderProduct.quantity}
           </div>
 
-          <button class="buy-again-button button-primary">
+          <button class="buy-again-button button-primary js-buy-again"
+          data-product-id="${orderProduct.productId}">
             <img class="buy-again-icon" src="images/icons/buy-again.png">
             <span class="buy-again-message">Buy it again</span>
           </button>
         </div>
+
 
         <div class="product-actions">
             <a href="tracking.html?orderId=${order.id}&productId=${orderProduct.productId}">
@@ -52,6 +58,11 @@ async function renderOrders() {
                 Track package
             </button>
             </a>
+
+            <button class="cancel-order-button button-secondary js-cancel-order"
+            data-order-id="${order.id}">
+            Cancel Order
+            </button>
         </div>
       `;
     });
@@ -90,7 +101,48 @@ async function renderOrders() {
     `;
   });
 
-  document.querySelector('.js-orders-grid').innerHTML = ordersHTML;
+document.querySelector('.js-orders-grid').innerHTML = ordersHTML;
+
+document.querySelectorAll('.js-buy-again')
+.forEach((button) => {
+
+  button.addEventListener('click', () => {
+
+    const productId = button.dataset.productId;
+
+    addToCart(productId);
+
+    window.location.href = 'checkout.html';
+
+  });
+
+});
+
+document.querySelectorAll('.js-cancel-order')
+.forEach((button)=>{
+
+button.addEventListener('click',()=>{
+
+const orderId = button.dataset.orderId;
+
+const confirmCancel = confirm("Are you sure you want to cancel this order?");
+
+if(!confirmCancel){
+return;
+}
+
+let storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+
+storedOrders = storedOrders.filter((order)=> order.id !== orderId);
+
+localStorage.setItem('orders', JSON.stringify(storedOrders));
+
+location.reload();
+
+});
+
+});
+
 }
 
 renderOrders();

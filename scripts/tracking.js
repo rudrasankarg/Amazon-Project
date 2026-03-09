@@ -1,5 +1,8 @@
 import { orders } from '../data/order.js';
 import { getProduct, loadProductsFetch } from '../data/products.js';
+import { updateCartQuantity } from './utils/cartQuantity.js';
+
+updateCartQuantity();
 
 async function renderTracking() {
 

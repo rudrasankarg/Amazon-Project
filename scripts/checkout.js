@@ -4,6 +4,9 @@ import { renderPaymentSummary } from "./checkout/paymentsummary.js";
 //import '../data/backend-practice.js';
 import { loadProductsFetch } from "../data/products.js";
 import { loadCart, cart } from "../data/cart.js";
+import { updateCartQuantity } from './utils/cartQuantity.js';
+
+updateCartQuantity();
 
 
 function updateCheckoutItems() {
