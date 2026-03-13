@@ -1,10 +1,10 @@
 //1. Generate HTML for products
-//2. Added event listeners to "Add to Cart" buttons
-//3. When "Add to Cart" button is clicked, add product to cart array
+//2. Add event listeners to Add to Cart buttons
+//3. Add selected quantity to cart
 //4. Update cart quantity in header
 
-import {cart, addToCart} from '../data/cart.js';
-import {products, loadProducts} from '../data/products.js';
+import { cart, addToCart } from '../data/cart.js';
+import { products, loadProducts } from '../data/products.js';
 import { updateCartQuantity } from './utils/cartQuantity.js';
 
 updateCartQuantity();
@@ -17,6 +17,7 @@ function renderProductsGrid() {
   products.forEach((product) => {
     productsHTML += `
       <div class="product-container">
+
         <div class="product-image-container">
           <img class="product-image"
             src="${product.image}">
@@ -39,7 +40,7 @@ function renderProductsGrid() {
         </div>
 
         <div class="product-quantity-container">
-          <select>
+          <select class="js-quantity-selector-${product.id}">
             <option selected value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -57,42 +58,48 @@ function renderProductsGrid() {
 
         <div class="product-spacer"></div>
 
-        <div class="added-to-cart">
+        <div class="added-to-cart js-added-${product.id}" style="opacity:0;">
           <img src="images/icons/checkmark.png">
           Added
         </div>
 
         <button class="add-to-cart-button button-primary js-add-to-cart"
-        data-product-id="${product.id}">
+          data-product-id="${product.id}">
           Add to Cart
         </button>
+
       </div>
     `;
   });
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-  function updateCartQuantity() {
-    let cartQuantity = 0;
-
-    cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-    });
-
-    const quantityElement = document.querySelector('.js-cart-quantity');
-    if (quantityElement) {
-      quantityElement.innerHTML = cartQuantity;
-    }
-  }
-
-  updateCartQuantity();
-
   document.querySelectorAll('.js-add-to-cart')
     .forEach((button) => {
       button.addEventListener('click', () => {
+
         const productId = button.dataset.productId;
-        addToCart(productId);
+
+        const quantitySelector = document.querySelector(
+          `.js-quantity-selector-${productId}`
+        );
+
+        const quantity = Number(quantitySelector.value);
+
+        addToCart(productId, quantity);
+
         updateCartQuantity();
+
+
+        quantitySelector.value = 1;
+
+        const addedMessage = document.querySelector(`.js-added-${productId}`);
+        addedMessage.style.opacity = 1;
+
+        setTimeout(() => {
+          addedMessage.style.opacity = 0;
+        }, 2000);
+
+      });
     });
-  });
 }
