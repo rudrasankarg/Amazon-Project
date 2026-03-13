@@ -7,7 +7,9 @@ import { cart, addToCart } from '../data/cart.js';
 import { products, loadProducts } from '../data/products.js';
 import { updateCartQuantity } from './utils/cartQuantity.js';
 
+
 updateCartQuantity();
+
 
 loadProducts(renderProductsGrid);
 
@@ -74,6 +76,9 @@ function renderProductsGrid() {
 
   document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+
+  updateCartQuantity();
+
   document.querySelectorAll('.js-add-to-cart')
     .forEach((button) => {
       button.addEventListener('click', () => {
@@ -89,6 +94,7 @@ function renderProductsGrid() {
         addToCart(productId, quantity);
 
         updateCartQuantity();
+
 
         const cartIcon = document.querySelector('.js-cart-icon');
 
