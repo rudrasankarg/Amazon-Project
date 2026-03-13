@@ -90,6 +90,16 @@ function renderProductsGrid() {
 
         updateCartQuantity();
 
+        const cartIcon = document.querySelector('.js-cart-icon');
+
+        if (cartIcon) {
+          cartIcon.classList.add('cart-icon-animate');
+
+          setTimeout(() => {
+            cartIcon.classList.remove('cart-icon-animate');
+          }, 400);
+        }
+
 
         quantitySelector.value = 1;
 
