@@ -3,11 +3,11 @@
 //3. Add selected quantity to cart
 //4. Update cart quantity in header
 
-import { cart, addToCart } from '../data/cart.js';
+import { cart, addToCart, loadFromStorage } from '../data/cart.js';
 import { products, loadProducts } from '../data/products.js';
 import { updateCartQuantity } from './utils/cartQuantity.js';
 
-
+loadFromStorage();
 updateCartQuantity();
 
 
